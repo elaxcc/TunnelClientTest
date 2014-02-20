@@ -18,6 +18,7 @@
 #include "NetSocket/NetCommon.h"
 
 #include "Software/Log.h"
+#include "Software/StringService.h"
 
 #include <rsa/rsa.h>
 #include <pem/pem.h>

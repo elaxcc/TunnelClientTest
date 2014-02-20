@@ -61,7 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="NetSocket.lib TunnelCommon.lib  libeay32.lib ssleay32.lib"
+				AdditionalDependencies="NetSocket.lib TunnelCommon.lib libeay32.lib ssleay32.lib Software.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../TunnelCommon/Debug;../../boost/stage/lib;../../Software/Debug;../../NetSocket/Debug;../../openssl/out32.dbg"
 				GenerateDebugInformation="true"
@@ -136,7 +136,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="NetSocket.lib Software.lib TunnelCommon.lib  libeay32.lib ssleay32.lib"
+				AdditionalDependencies="NetSocket.lib Software.lib TunnelCommon.lib libeay32.lib ssleay32.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../TunnelCommon/Release;../../boost/stage/lib;../../Software/Release;../../NetSocket/Release;../../openssl/out32.dbg"
 				GenerateDebugInformation="true"
