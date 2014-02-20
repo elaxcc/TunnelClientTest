@@ -24,5 +24,6 @@
 
 #include "TunnelCommon/Crypting.h"
 #include "TunnelCommon/Hash.h"
+#include "TunnelCommon/Protocol.h"
 
 // TODO: reference additional headers your program requires here

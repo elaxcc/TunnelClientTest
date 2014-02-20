@@ -7,10 +7,12 @@ TunnelClient::TunnelClient(short int initial_polling_flags_,
 	: Net::client(initial_polling_flags_, nonblocking, no_nagle_delay)
 	, protocol_(this)
 {
+	protocol_.switch_to_send(ProtocolParser::Out_packet_type_send_internal_rsa_pub_key);
 }
 
 TunnelClient::~TunnelClient()
 {
+	protocol_.reset();
 }
 
 int TunnelClient::process_events(short int polling_events)
@@ -28,14 +30,18 @@ int TunnelClient::process_events(short int polling_events)
 		}
 
 		// parse packet
-		if (protocol_.got_rsa_key())
+		if (!recv_data.empty())
 		{
-			int parse_result = protocol_.parse_common(recv_data);
+			int parse_result = protocol_.parse(recv_data);
 			//!fixme process parse_result
 		}
 		if (protocol_.is_complete())
 		{
-			protocol_.process_in();
+			int result = protocol_.process_in();
+			if (result == TunnelCommon::Protocol::Error_rsa_key_packet)
+			{
+				return Net::error_connection_is_closed_;
+			}
 		}
 	}
 	else if (polling_events == Net::c_poll_event_out)
