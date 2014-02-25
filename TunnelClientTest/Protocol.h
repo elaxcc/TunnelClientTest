@@ -26,7 +26,7 @@ private:
 		const std::string& passwd, const std::string node_name, std::vector<char>& out_packet);
 
 	TunnelClient *own_node_;
-
 	Out_packet_type out_packet_type_;
+	bool is_logined_;
 };
 

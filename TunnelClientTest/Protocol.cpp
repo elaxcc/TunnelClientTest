@@ -18,6 +18,7 @@ const std::string node_name;
 ProtocolParser::ProtocolParser(TunnelClient *own_node)
 	: own_node_(own_node)
 	, out_packet_type_(Out_packet_type_no_packet)
+	, is_logined_(false)
 {
 }
 
@@ -51,6 +52,23 @@ int ProtocolParser::process_in()
 				}
 				c_Debug() << "process packet, type == 'Packet_type_external_rsa_key', Error_rsa_key_packet" << "\r\n";
 				return Error_rsa_key_packet;
+			}
+			break;
+		}
+	case Packet_type_login_accept :
+		{
+			if (!is_logined_)
+			{
+				const std::vector<char>& accept_packet = get_data();
+				std::string accept_packet_str(&accept_packet[0], accept_packet.size());
+				if (accept_packet_str == TunnelCommon::Protocol::c_packet_login_accept)
+				{
+					c_Debug() << "Autorization OK!!!\r\n";
+					is_logined_ = true;
+					return Error_no;
+				}
+				c_Debug() << "Autorization Fails!!!\r\n";
+				return Error_server_accept;
 			}
 			break;
 		}

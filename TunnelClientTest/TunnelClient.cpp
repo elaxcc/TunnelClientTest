@@ -39,7 +39,8 @@ int TunnelClient::process_events(short int polling_events)
 		{
 			int result = protocol_.process_in();
 			protocol_.flush();
-			if (result == TunnelCommon::Protocol::Error_rsa_key_packet)
+			if (result == TunnelCommon::Protocol::Error_rsa_key_packet ||
+				result == TunnelCommon::Protocol::Error_server_accept)
 			{
 				return Net::error_connection_is_closed_;
 			}
